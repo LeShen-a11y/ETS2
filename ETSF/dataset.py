@@ -26,7 +26,7 @@ class Dataset_combine(data.Dataset):
             self.rgb_list_file = "list/ucf-rgb.list"
             self.dvs_list_file = "list/ucf-dvs.list"
 
-        default_select_dir = "event_saliency/event_select_22_54%"
+        default_select_dir = "event_saliency/event_sparsity_77_46%"
 
 
         self.select_csv_dir = Path(
