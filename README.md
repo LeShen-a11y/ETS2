@@ -9,15 +9,16 @@
 > Le Shen*, Ling Luo*, Chong Wang, Wenxiu Huang, Shuhan Ye, Yuanbin Qian, Bolin Zhang,Jiangbo Qian
 
 ### :dart: Abstract
-Event cameras have been introduced to video anomaly detection for their high dynamic range and temporal resolution, and combined with spiking neural networks (SNNs) they enable low-power, low-latency inference. However, SNN-based methods that rely only on sparse event streams often lack contextual semantics, limiting detection accuracy. Mean-while, most RGB–event fusion approaches introduce dense RGB computation at inference, leading to substantial ANN overhead and weakening the efficiency advantages of spike-driven SNN frameworks. To address this, we propose an efficient RGB–event hybrid SNN framework that leverages RGB and DVS signals
+Event cameras have been introduced to video anomaly detection for their high dynamic range and temporal resolution, and combined with spiking neural networks (SNNs) they enable low-power, low-latency inference. However, SNN-based methods that rely only on sparse event streams often lack contextual semantics, limiting detection accuracy. Mean-while, most RGB–event fusion approaches introduce dense RGB computation at inference, leading to substantial ANN overhead and weakening the efficiency advantages of spike-driven SNN frameworks. To address this, we propose an efficient RGB–event hybrid SNN framework that leverages RGB and event streams
 while using only a small set of key RGB clips to enhance semantics. Specifically, an Event-Triggered Sparse Sampling(ETSS) module selects dynamic RGB clips based on event saliency, and a Membrane Feature Injection (MFI) module injects RGB semantic features into event representations via the membrane mechanism for efficient fusion. Experiments on UCF-Crime-CEP demonstrate that the proposed framework approaches the performance of ANN-based counterparts while reducing inference energy consumption by 99.61%, demonstrating a favorable trade-off between detection performance and energy efficiency.
 Index Terms—event camera, spiking neural network, video anomaly detection, RGB-event fusion
 ### :fire: What's New
 
 ### :gem: Framework
 <img width="1849" height="883" alt="main_final" src="https://github.com/user-attachments/assets/b14a6ded-387a-4fff-b04f-d7a6438b1a36" />
-Overview of the proposed RGB-sparse hybrid spiking framework for weakly supervised video anomaly detection. Given temporally aligned event
-frames and RGB clips, Event-Triggered Sparse Sampling (ETSS) first computes event saliency scores via Event Saliency Calculation (ESC), and then applies
+Overview of the proposed RGB-sparse hybrid spiking framework for weakly supervised video anomaly detection. 
+
+Given temporally aligned event frames and RGB clips, Event-Triggered Sampling (ETS) first computes event saliency scores via Event Saliency Calculation (ESC), and then applies
 Gaussian-Mixture-Prior-based Local Region Partition (GMP) to divide the video into local motion-state regions. Based on these regions, region-aware sparse
 sampling selects sparse yet representative RGB clips, which are encoded by I3D to extract semantic features. The feature filling module restores the sparse
 RGB features into a continuous temporal representation for subsequent spiking processing and cross-modal interaction. In parallel, the event stream is
