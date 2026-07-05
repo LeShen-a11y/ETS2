@@ -1,11 +1,11 @@
-# ETSF
+# ETSS
 <div align="center">
 <p align="center">
 </p>
 
 </div>
 
-> **Event-Triggered Sparse Fusion: An RGB-Sparse Hybrid Framework of Spiking Neural Network for Video Anomaly Detection**
+> **Event-Triggered Sparse Synchronization: An RGB-Efficient Hybrid Framework of Spiking Neural Network for Video Anomaly Detection**
 > Le Shen*, Ling Luo*, Chong Wang, Wenxiu Huang, Shuhan Ye, Yuanbin Qian, Bolin Zhang,Jiangbo Qian
 
 ### :dart: Abstract
