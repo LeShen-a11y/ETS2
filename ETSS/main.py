@@ -76,7 +76,7 @@ if __name__ == '__main__':
 
      # 加载权重
     # checkpoint = torch.load("ckpt/snn-mix_81_81.pkl",device)
-    checkpoint = torch.load("/home/cy518/sl/code/ETSS_Git/ETSF/ckpt/spa_77_46/snn-mix_82_86.pkl",device)
+    checkpoint = torch.load("/home/cy518/sl/code/ETSS_Git/ETSS/ckpt/spa_77_46/snn-mix_82_86.pkl",device)
     # 若 checkpoint 含 optimizer 等信息，取模型字典
     if 'model_state_dict' in checkpoint:
         model.load_state_dict(checkpoint['model_state_dict'])
