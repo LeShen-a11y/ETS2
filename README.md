@@ -27,9 +27,10 @@ representations at the membrane-feature level, and the fused temporal features a
 
 ### 🔨: Training
 Requirements: CUDA; numpy; tqdm; torchvision; timm==0.6.12; cupy==11.4.0; torch==1.12.1; spikingjelly==0.0.0.0.12;
-```
+
 The precomputed region labels and RGB selection flags under the best-performing RGB sparsity setting of **77.46%** are provided in `ETSS/event_saliency/event_sparsity_77_46%`. In each file, `dynamic_label` denotes the motion-state region label, where `0`, `1`, and `2` correspond to strong-dynamic, weak-dynamic, and static regions, respectively. The `select_flag` column indicates whether the corresponding RGB clip is selected for RGB semantic extraction, where `1` denotes selected and other values denote not selected.
 
+```
 python main.py
 ```
 
