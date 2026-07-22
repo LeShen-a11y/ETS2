@@ -34,6 +34,85 @@ The precomputed region labels and RGB selection flags for the **UCF-Crime datase
 python main.py
 ```
 
+### :memo: Supplementary Details
+
+This section provides additional implementation details and experimental analyses.
+
+
+#### Region-Aware RGB Budget Allocation
+
+To achieve efficient RGB enhancement, ETS² performs region-aware RGB clip selection according to event saliency. 
+The sampling budget is adaptively allocated among strong-dynamic, weak-dynamic, and static regions.
+
+For example, in the UCF-Crime dataset, given a video with 171 candidate RGB clips and an RGB sparsity ratio of 80%, the retained RGB budget is 35 clips. 
+Following the predefined allocation ratio of 2:2:1 (strong-dynamic : weak-dynamic : static), the budget is assigned as 14, 14, and 7 clips, respectively.
+
+When the allocated budget exceeds the available candidates in a region, a capacity-aware adjustment is applied to redistribute the remaining clips.
+
+
+#### Energy Evaluation
+
+The proposed framework contains both ANN-based RGB processing and spike-driven SNN processing.
+The inference energy is estimated by separately accounting for the two branches.
+
+For ANN computation, energy consumption is estimated according to MAC operations:
+
+\[
+E_{ANN}=E_{MAC}\times \sum_l FLOP_l^{ANN}
+\]
+
+For the SNN branch, the energy is estimated based on synaptic operations (SOPs) considering spike rates and timesteps:
+
+\[
+SOP_l=R_l\times T\times FLOP_l
+\]
+
+The total inference energy is calculated as:
+
+\[
+E_{total}=E_{ANN}+E_{SNN}
+\]
+
+The energy evaluation follows the 45 nm CMOS hardware model, where MAC and AC operations consume 4.6 pJ and 0.9 pJ, respectively.
+
+
+#### Event Partition and Timestep Analysis
+
+We investigate the influence of event-frame granularity and spiking timesteps.
+
+The best configuration is achieved with:
+
+- temporal ratio: $\rho=4$
+- spiking timestep: $T_{sf}=4$
+
+which achieves an AUC of 82.86% on UCF-Crime-CEP.
+
+
+#### Saliency Granularity Analysis
+
+We compare two saliency estimation strategies:
+
+- Event-frame-level estimation
+- RGB-clip-level estimation
+
+RGB-clip-level estimation achieves better performance because the saliency calculation scale is consistent with the RGB sampling unit.
+
+The results are:
+
+| Saliency Granularity | AUC (%) |
+|---|---|
+| Event-frame level | 82.53 |
+| RGB-clip level | 82.86 |
+
+
+#### Human Action Recognition Generalization
+
+To evaluate the generalization capability of ETS² beyond anomaly detection, we further conduct experiments on HMDB51-CEP.
+
+Following previous work, HMDB51 is paired with HMDB51-DVS to evaluate cross-modal event-RGB learning for fine-grained action recognition.
+
+The event branch uses SpikingFormer-2-256 and the RGB branch uses ResNet-50.
+
 
 ### 💘 Acknowledgements
 We thank the [SpikingJelly](https://github.com/fangwei123456/spikingjelly), [Spikingformer](https://github.com/zhouchenlin2096/Spikingformer) and [AR-Net](https://github.com/wanboyang/Anomaly_AR_Net_ICME_2020) for a quickly implement.
