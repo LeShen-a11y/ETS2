@@ -117,13 +117,13 @@ Under a 45 nm CMOS hardware platform, the energy costs of multiply-accumulate an
 The computation of the ANN branch is dominated by multiply-accumulate (MAC) operations. Its energy consumption is estimated by accumulating the MAC-equivalent operation counts over all ANN layers:
 
 <p align="center">
-  <code>E<sub>ANN</sub> = E<sub>MAC</sub> × Σ<sub>l=1</sub><sup>L<sub>ANN</sub></sup> FLOP<sup>ANN</sup><sub>l</sub></code>
+  <code>E<sub>ANN</sub> = E<sub>MAC</sub> × Σ<sub>k=1</sub><sup>L<sub>ANN</sub></sup> FLOP<sup>ANN</sup><sub>k</sub></code>
 </p>
 
 where:
 
 - <i>L</i><sub>ANN</sub> denotes the number of layers in the ANN branch.
-- FLOP<sup>ANN</sup><sub>l</sub> represents the number of floating-point operations in the <i>l</i>-th ANN layer.
+- FLOP<sup>ANN</sup><sub>k</sub> represents the number of floating-point operations in the <i>k</i>-th ANN layer.
 
 For sparse inference, the layer-wise operation counts are calculated according to the actual number of selected RGB clips and the adopted crop setting.
 
@@ -131,25 +131,25 @@ For sparse inference, the layer-wise operation counts are calculated according t
 
 #### SNN Branch
 
-For the SNN branch, the number of synaptic operations in the <i>l</i>-th layer is estimated as:
+For the SNN branch, the number of synaptic operations in the <i>k</i>-th layer is estimated as:
 
 <p align="center">
-  <code>SOP<sub>l</sub> = R<sub>l</sub> × T × FLOP<sub>l</sub></code>
+  <code>SOP<sub>k</sub> = R<sub>k</sub> × T × FLOP<sub>k</sub></code>
 </p>
 
 where:
 
-- <i>R</i><sub>l</sub> ∈ [0, 1] is the average spike rate of layer <i>l</i>.
+- <i>R</i><sub>k</sub> ∈ [0, 1] is the average spike rate of layer <i>k</i>.
 - <i>T</i> is the number of spiking timesteps.
-- FLOP<sub>l</sub> is the number of floating-point operations in the corresponding non-spiking layer.
+- FLOP<sub>k</sub> is the number of floating-point operations in the corresponding non-spiking layer.
 
 The energy consumption of the SNN branch is estimated as:
 
 <p align="center">
-  <code>E<sub>SNN</sub> = E<sub>MAC</sub> × FLOP<sub>1</sub> + E<sub>AC</sub> × Σ<sub>l=2</sub><sup>L<sub>SNN</sub></sup> SOP<sub>l</sub></code>
+  <code>E<sub>SNN</sub> = E<sub>MAC</sub> × FLOP<sub>1</sub> + E<sub>AC</sub> × Σ<sub>k=2</sub><sup>L<sub>SNN</sub></sup> SOP<sub>k</sub></code>
 </p>
 
-Here, FLOP<sub>1</sub> represents the number of floating-point operations in the first convolutional layer. For all subsequent layers with <i>l</i> ≥ 2, spike-driven binary activations are employed, and the computations are modeled as synaptic operations.
+Here, FLOP<sub>1</sub> represents the number of floating-point operations in the first convolutional layer. For all subsequent layers with <i>k</i> ≥ 2, spike-driven binary activations are employed, and the computations are modeled as synaptic operations.
 
 ---
 
